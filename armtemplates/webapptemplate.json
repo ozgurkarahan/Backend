@@ -71,7 +71,7 @@
 			},
 			"properties": {
 				"name": "[parameters('apiAppName')]",
-                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('apiAppName'))]",
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('appServicePlanName'))]",
 				"clientAffinityEnabled": false,
 				"siteConfig": {
 					"AlwaysOn": true,
