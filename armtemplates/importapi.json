@@ -39,14 +39,22 @@
         }, 
         "policyContent": {
             "type": "string"
+        },
+
+        "productName": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of the product to create in API Management Service"
+            }
         }
     },
     "variables": {
-        "name": "[parameters('apiName')]"
+        "name": "[parameters('apiName')]",
+        "apimServiceName": "[parameters('apimServiceName')]"
     },
     "resources": [
         {
-            "name": "[concat(parameters('apimServiceName'), '/', variables('name'))]",
+            "name": "[concat(variables('apimServiceName'), '/', variables('name'))]",
             "type": "Microsoft.ApiManagement/service/apis",
             "apiVersion": "2017-03-01",
             "properties": {
@@ -86,6 +94,25 @@
                         "policyContent": "[parameters('policyContent')]"
                     }
                 }
+            ]
+        },
+        {
+            "type": "Microsoft.ApiManagement/service/products",
+            "name": "[concat(variables('apimServiceName'),'/',parameters('productName'))]",
+            "apiVersion": "2017-03-01",
+            "properties":{
+                "approvalRequired":false,
+                "displayName": "Starter"
+            },
+            "resources": [
+                {
+                    "type": "apis",
+                    "name": "[parameters('apiName')]",
+                    "apiVersion": "2017-03-01"
+                }
+            ],
+            "dependsOn": [
+                "[concat('Microsoft.ApiManagement/service/', parameters('apimServiceName'), '/apis/',variables('name'))]"
             ]
         }
     ]

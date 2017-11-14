@@ -19,6 +19,9 @@
         },
         "policyContent": {
             "value": "<policies>\r\n  <inbound />\r\n  <backend>\r\n    <forward-request />\r\n  </backend>\r\n  <outbound />\r\n</policies>"
+        },
+        "productName": {
+            "value": "starter"
         }
     }
   }
