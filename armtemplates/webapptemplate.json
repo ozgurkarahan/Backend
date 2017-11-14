@@ -2,7 +2,7 @@
 	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
 	"contentVersion": "1.0.0.0",
 	"parameters": {
-		"webAppName": {
+		"apiAppName": {
 			"type": "string"
 		},
 		"appServicePlanName": {
@@ -19,7 +19,7 @@
 		}
 	},
 	"variables": {
-        "appInsights-Service": "[concat(parameters('webAppName'), '-appinsights')]"
+        "appInsights-Service": "[concat(parameters('apiAppName'), '-appinsights')]"
     },
 	"resources": [
 		{
@@ -42,7 +42,7 @@
             "apiVersion": "2016-09-01",
             "dependsOn": [],
             "tags": {
-                "[concat('hidden-related:', resourceGroup().id, '/providers/Microsoft.Web/serverfarms/', variables('serviceplan'))]": "Resource",
+                "[concat('hidden-related:', resourceGroup().id, '/providers/Microsoft.Web/serverfarms/', parameters('appServicePlanName'))]": "Resource",
                 "displayName": "[parameters('appServicePlanName')]"
             },
             "properties": {
@@ -58,7 +58,7 @@
             }
         },
         {
-			"name": "[parameters('webAppName')]",
+			"name": "[parameters('apiAppName')]",
 			"type": "Microsoft.Web/sites",
 			"location": "[resourceGroup().location]",
 			"apiVersion": "2016-08-01",
@@ -67,11 +67,11 @@
                 "[parameters('appServicePlanName')]"
 			],
 			"tags": {
-				"displayName": "[parameters('webAppName')]"
+				"displayName": "[parameters('apiAppName')]"
 			},
 			"properties": {
-				"name": "[parameters('webAppName')]",
-                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('webAppName'))]",
+				"name": "[parameters('apiAppName')]",
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('apiAppName'))]",
 				"clientAffinityEnabled": false,
 				"siteConfig": {
 					"AlwaysOn": true,
