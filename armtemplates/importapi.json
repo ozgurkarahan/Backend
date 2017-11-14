@@ -30,7 +30,7 @@
                 "description": "Swagger url of the imported api"
             }
         },
-        "Suffix": {
+        "suffix": {
             "type": "string",
             "minLength": 1,
             "metadata": {
