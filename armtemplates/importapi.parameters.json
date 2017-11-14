@@ -14,8 +14,8 @@
 		"swaggerUrl": {
 			"value": "#{swaggerUrl}#"
 		},
-		"Suffix": {
-			"value": "#{Suffix}#"
+		"suffix": {
+			"value": "#{suffix}#" 
 		}
     }
   }
