@@ -63,7 +63,7 @@
                 "isOnline": true,
                 "displayName": "[variables('name')]",
                 "serviceUrl": "[parameters('serviceUrl')]",
-                "path": "[parameters('Suffix')]",
+                "path": "[parameters('suffix')]",
                 "protocols": [
                     "http",
                     "https"
