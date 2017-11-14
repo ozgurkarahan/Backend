@@ -80,7 +80,7 @@
                     "type": "policies",
                     "name":"policy",
                     "dependsOn": [
-                        "[concat('Microsoft.ApiManagement/service/', parameters('apimServiceName'), '/apis/exampleApiWithPolicy')]"
+                        "[concat('Microsoft.ApiManagement/service/', parameters('apimServiceName'), '/apis/',variables('name'))]"
                     ],
                     "properties":{
                         "policyContent": "[parameters('policyContent')]"
