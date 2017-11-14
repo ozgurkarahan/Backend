@@ -1,0 +1,69 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "apimName": {
+            "type": "string",
+            "minLength": 1,
+            "metadata": {
+                "description": "Name of APIM instance"
+            }
+        },
+        "serviceUrl": {
+            "type": "string",
+            "minLength": 1,
+            "metadata": {
+                "description": "Backend url for the imported api"
+            }
+        },
+        "swaggerUrl": {
+            "type": "string",
+            "minLength": 1,
+            "metadata": {
+                "description": "Swagger url of the imported api"
+            }
+        },
+        "Suffix": {
+            "type": "string",
+            "minLength": 1,
+            "metadata": {
+                "description": "The suffix of api"
+            }
+        }
+    },
+    "variables": {
+        "name": "test api json"
+    },
+    "resources": [
+        {
+            "name": "[concat(parameters('apimName'), '/', variables('name'))]",
+            "type": "Microsoft.ApiManagement/service/apis",
+            "apiVersion": "2017-03-01",
+            "properties": {
+                "description": "Api Created From json",
+                "authenticationSettings": {
+                    "oAuth2": {
+                        "oAuth2": null,
+                        "openid": null
+                    }
+                },
+                "subscriptionKeyParameterNames": {
+                    "header": "Ocp-Apim-Subscription-Key",
+                    "query": "subscription-key"
+                },
+                "type": "http",
+                "isCurrent": true,
+                "isOnline": true,
+                "displayName": "[variables('name')]",
+                "serviceUrl": "[parameters('serviceUrl')]",
+                "path": "[parameters('Suffix')]",
+                "protocols": [
+                    "http",
+                    "https"
+                ],
+                "contentValue": "[parameters('swaggerUrl')]",
+                "contentFormat": "swagger-link-json"
+            }
+        }
+    ]
+}
