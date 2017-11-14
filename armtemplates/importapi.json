@@ -106,13 +106,14 @@
             },
             "resources": [
                 {
-                    "type": "apis",
-                    "name": "[parameters('apiName')]",
                     "apiVersion": "2017-03-01",
+                    "type": "apis",
+                    "name": "[variables('name')]",
                     "dependsOn": [
-                        "[concat('Microsoft.ApiManagement/service/', parameters('apimServiceName'), '/apis/',variables('name'))]"
+                        "[concat('Microsoft.ApiManagement/service/', variables('apimServiceName'), '/apis/', variables('name'))]",
+                        "[concat('Microsoft.ApiManagement/service/', variables('apimServiceName'), '/products/', parameters('productName'))]"
                     ]
-                }
+                }                
             ]           
         }
     ]
