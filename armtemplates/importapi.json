@@ -36,6 +36,9 @@
             "metadata": {
                 "description": "The suffix of api in Api Management Service. It must be unique."
             }
+        }, 
+        "policyContent": {
+            "type": "string"
         }
     },
     "variables": {
@@ -70,7 +73,20 @@
                 ],
                 "contentValue": "[parameters('swaggerUrl')]",
                 "contentFormat": "swagger-link-json"
-            }
+            },
+            "resources": [
+                {
+                    "apiVersion": "2017-03-01",
+                    "type": "policies",
+                    "name":"policy",
+                    "dependsOn": [
+                        "[concat('Microsoft.ApiManagement/service/', parameters('apimServiceName'), '/apis/exampleApiWithPolicy')]"
+                    ],
+                    "properties":{
+                        "policyContent": "[parameters('policyContent')]"
+                    }
+                }
+            ]
         }
     ]
 }
