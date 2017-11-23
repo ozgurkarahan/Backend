@@ -19,7 +19,9 @@
 		}
 	},
 	"variables": {
-        "appInsights-Service": "[concat(parameters('apiAppName'), '-appinsights')]"
+        "appInsights-Service": "[concat(parameters('apiAppName'), '-appinsights')]",
+		"appServicePlanName": "[parameters('appServicePlanName')]",
+		"apiAppName": "[parameters('apiAppName')]"		
     },
 	"resources": [
 		{
@@ -36,17 +38,17 @@
 			}
         },
 		{
-            "name": "[parameters('appServicePlanName')]",
+            "name": "[variables('appServicePlanName')]",
             "type": "Microsoft.Web/serverfarms",
             "location": "[resourceGroup().location]",
             "apiVersion": "2016-09-01",
             "dependsOn": [],
             "tags": {
-                "[concat('hidden-related:', resourceGroup().id, '/providers/Microsoft.Web/serverfarms/', parameters('appServicePlanName'))]": "Resource",
-                "displayName": "[parameters('appServicePlanName')]"
+                "[concat('hidden-related:', resourceGroup().id, '/providers/Microsoft.Web/serverfarms/', variables('appServicePlanName'))]": "Resource",
+                "displayName": "[variables('appServicePlanName')]"
             },
             "properties": {
-                "name": "[parameters('appServicePlanName')]",
+                "name": "[variables('appServicePlanName')]",
                 "perSiteScaling": true
             },
             "sku": {
@@ -58,20 +60,21 @@
             }
         },
         {
-			"name": "[parameters('apiAppName')]",
+			"name": "[variables('apiAppName')]",
 			"type": "Microsoft.Web/sites",
+			"kind": "api",
 			"location": "[resourceGroup().location]",
 			"apiVersion": "2016-08-01",
 			"dependsOn": [
-                "[variables('appInsights-Service')]",
-                "[parameters('appServicePlanName')]"
+                "[resourceId('Microsoft.Web/serverfarms', variables('appInsights-Service'))]",
+                "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanName'))]"
 			],
 			"tags": {
-				"displayName": "[parameters('apiAppName')]"
+				"displayName": "[variables('apiAppName')]"
 			},
 			"properties": {
-				"name": "[parameters('apiAppName')]",
-                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', parameters('appServicePlanName'))]",
+				"name": "[variables('apiAppName')]",
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanName'))]",
 				"clientAffinityEnabled": false,
 				"siteConfig": {
 					"AlwaysOn": true,
