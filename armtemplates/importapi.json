@@ -102,7 +102,7 @@
             "apiVersion": "2017-03-01",
             "properties":{
                 "approvalRequired":false,
-                "displayName": "Starter"
+                "displayName": "unlimited"
             },
             "resources": [
                 {
