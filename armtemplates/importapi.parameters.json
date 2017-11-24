@@ -18,7 +18,7 @@
 			"value": "#{suffix}#" 
         },
         "policyContent": {
-            "value": "<policies>     <inbound>         <validate-jwt failed-validation-error-message=\"Unauthorized. Access token is missing or invalid.\" failed-validation-httpcode=\"401\" header-name=\"Authorization\">             <openid-config url=\"https://login.microsoftonline.com/azurepaas.onmicrosoft.com/.well-known/openid-configuration\" />             <audiences>                 <audience>https://azurepaas.onmicrosoft.com/Apim.Backend</audience>             </audiences>         </validate-jwt>         <base />     </inbound>     <backend>         <base />     </backend>     <outbound>         <base />     </outbound>     <on-error>         <base />     </on-error> </policies>"
+            "value": "<policies>     <inbound>         <validate-jwt failed-validation-error-message=\"Unauthorized. Access token is missing or invalid.\" failed-validation-httpcode=\"401\" header-name=\"Authorization\">             <openid-config url=\"https://login.microsoftonline.com/#{Domain}#/.well-known/openid-configuration\" />             <audiences>                 <audience>#{Audience}#</audience>             </audiences>         </validate-jwt>         <base />     </inbound>     <backend>         <base />     </backend>     <outbound>         <base />     </outbound>     <on-error>         <base />     </on-error> </policies>"
         },
         "productName": {
             "value": "unlimited"
