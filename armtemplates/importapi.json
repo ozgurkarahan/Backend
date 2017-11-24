@@ -69,7 +69,7 @@
                     "header": "Ocp-Apim-Subscription-Key",
                     "query": "subscription-key"
                 },
-                "type": "http",
+                "type": "https",
                 "isCurrent": true,
                 "isOnline": true,
                 "displayName": "[variables('name')]",
