@@ -72,6 +72,7 @@
 			"tags": {
 				"displayName": "[variables('apiAppName')]"
 			},
+			"httpsOnly": true,
 			"properties": {
 				"name": "[variables('apiAppName')]",
                 "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanName'))]",
@@ -100,7 +101,7 @@
 						{
 							"name": "AzureAd:Audience", "value": "[parameters('Audience')]"
 						}
-                    ]
+					]
 				}
 			}
 		}
